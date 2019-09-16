@@ -35,6 +35,7 @@ public class Myframe extends JFrame{
 		setTitle(str);
 		setLayout(new GridLayout(0, 1));
 		setBounds(300, 200, 400, 400);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		pa.setLayout(new GridLayout(3, 3));
 		//pa.setBounds(0, 0, 400, 400);
 		add(pa);
@@ -111,8 +112,12 @@ public class Myframe extends JFrame{
 
 	}
 	void reset(int d) {
-		if (JOptionPane.OK_CANCEL_OPTION == d) {
+		if (JOptionPane.OK_OPTION == d) {
 			pa.removeAll();
+			createButton();
+			pa.validate();
+			arrO.removeAll(arrO);
+			arrX.removeAll(arrX);
 		}
 	}
 }
