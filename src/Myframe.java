@@ -1,14 +1,18 @@
 import java.awt.Button;
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+import java.util.Random;
 import javax.swing.JFrame;
 
 public class Myframe extends JFrame{
 	
 	Button bt[] = new Button[9];
+	int count = 0;
+	Random ran = new Random();
+	int num[] = {0,1,2,3,4,5,6,7,8};
 	
 	public Myframe(String str) {
 		setTitle(str);
@@ -26,15 +30,30 @@ public class Myframe extends JFrame{
 	}
 	void setX(int i) {
 		bt[i].setLabel("X");
-		bt[i].setFont(new Font("Tahoma", Font.BOLD, 60));
+		bt[i].setBackground(Color.BLUE);
+		bt[i].setFont(new Font("Tahoma", Font.BOLD, 100));
+		bt[i].setForeground(Color.BLACK);
+		bt[i].setEnabled(false);
+	}
+	void setO(int i) {
+		bt[i].setLabel("O");
+		bt[i].setBackground(Color.RED);
+		bt[i].setFont(new Font("Tahoma", Font.BOLD, 100));
+		bt[i].setEnabled(false);
 	}
 	void onClick(int i) {
 		bt[i].addActionListener(new ActionListener() {
 				
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				setX(i);
-					
+				if (count%2 == 0) {
+					setTitle("Next Player O");
+					setX(i);
+				}else {
+					setTitle("Next Player X");
+					setO(i);
+				}
+				count++;
 			}
 		});
 	}
