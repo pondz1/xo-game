@@ -1,20 +1,21 @@
 import java.awt.Button;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class Main {
-	
-	public static void main(String[] args) {
-		Myframe gamePlay = new Myframe("XO");
-		gamePlay.setVisible(false);
 
-		JFrame menu = new JFrame("Wellcome");
+	static JFrame menu = new JFrame("Wellcome");
+
+	public static void main(String[] args) {
+		gamePlayTwo gamePlayTwo = new gamePlayTwo("XO");
+		gamePlayTwo.setVisible(false);
+
+		
 		menu.setLayout(null);
 		menu.setBounds(300, 200, 400, 200);
 		
@@ -25,8 +26,8 @@ public class Main {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				//menu.setVisible(false);
-				gamePlay.setVisible(true);
+				menu.setVisible(false);
+				gamePlayTwo.setVisible(true);
 				
 			}
 		});
@@ -34,9 +35,45 @@ public class Main {
 		pan.setSize(400, 200);
 		pan.setLayout(null);
 		pan.add(playTwo);
-		
+		menu.setDefaultCloseOperation(3);
 		menu.add(pan);
-		//menu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		menu.addWindowListener(new WindowListener(){
+		
+			@Override
+			public void windowOpened(WindowEvent e) {
+
+			}
+		
+			@Override
+			public void windowIconified(WindowEvent e) {				// TODO Auto-generated method stub
+				
+			}
+		
+			@Override
+			public void windowDeiconified(WindowEvent e) {				// TODO Auto-generated method stub
+				
+			}
+		
+			@Override
+			public void windowDeactivated(WindowEvent e) {				// TODO Auto-generated method stub
+				
+			}
+		
+			@Override
+			public void windowClosing(WindowEvent e) {				// TODO Auto-generated method stub
+				
+			}
+		
+			@Override
+			public void windowClosed(WindowEvent e) {				// TODO Auto-generated method stub
+				
+			}
+		
+			@Override
+			public void windowActivated(WindowEvent e) {				// TODO Auto-generated method stub
+				
+			}
+		});
 		menu.setVisible(true);
 		
 	}
