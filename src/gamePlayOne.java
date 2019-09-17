@@ -13,7 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-public class gamePlayTwo extends JFrame{
+public class gamePlayOne extends JFrame{
 	
 	JPanel pa = new JPanel();
 	Button bt[] = new Button[9];
@@ -40,7 +40,7 @@ public class gamePlayTwo extends JFrame{
 	int countO=0;
 	Main m = new Main();
 
-	public gamePlayTwo(String str) {
+	public gamePlayOne(String str) {
 		setTitle(str);
 		setLayout(null);
 		setBounds(300, 200, 400, 500);

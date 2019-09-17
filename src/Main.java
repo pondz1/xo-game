@@ -12,29 +12,46 @@ public class Main {
 	static JFrame menu = new JFrame("Wellcome");
 
 	public static void main(String[] args) {
-		gamePlayTwo gamePlayTwo = new gamePlayTwo("XO");
-		gamePlayTwo.setVisible(false);
+		gamePlayTwo playTwo = new gamePlayTwo("XO");
+		playTwo.setVisible(false);
 
+		gamePlayOne playOne = new gamePlayOne("XO");
+		playOne.setVisible(false);
 		
 		menu.setLayout(null);
 		menu.setBounds(300, 200, 400, 200);
 		
-		Button playTwo = new Button("2 Player");
-		playTwo.setSize(180, 90);
-		playTwo.setLocation(5, 20);
-		playTwo.addActionListener(new ActionListener() {
+		Button playTwoButton = new Button("2 Player");
+		playTwoButton.setSize(180, 90);
+		playTwoButton.setLocation(195, 20);
+		playTwoButton.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				menu.setVisible(false);
-				gamePlayTwo.setVisible(true);
+				playTwo.setVisible(true);
 				
 			}
 		});
+
+		Button playOneButton = new Button("1 Player");
+		playOneButton.setSize(180, 90);
+		playOneButton.setLocation(5, 20);
+		playOneButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				menu.setVisible(false);
+				playOne.setVisible(true);
+				
+			}
+		});
+
 		JPanel pan = new JPanel();
 		pan.setSize(400, 200);
 		pan.setLayout(null);
-		pan.add(playTwo);
+		pan.add(playOneButton);
+		pan.add(playTwoButton);
 		menu.setDefaultCloseOperation(3);
 		menu.add(pan);
 		menu.addWindowListener(new WindowListener(){
