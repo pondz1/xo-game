@@ -30,7 +30,8 @@ public class Myframe extends JFrame{
 	ArrayList<Integer> right = new ArrayList<Integer>();
 	
 	int input = 100;
-	
+	int countX=0;
+	int countO=0;
 	public Myframe(String str) {
 		setTitle(str);
 		setLayout(new GridLayout(0, 1));
@@ -73,10 +74,11 @@ public class Myframe extends JFrame{
 				if (count%2 == 0) {
 					setTitle("Next Player O");
 					setX(i);
-					//System.out.println(arrX);
+					countX++;
 				}else {
 					setTitle("Next Player X");
 					setO(i);
+					countO++;
 				}
 				count++;
 				checkWin();
@@ -109,6 +111,12 @@ public class Myframe extends JFrame{
 			input = JOptionPane.showConfirmDialog(null, message, "Message", JOptionPane.DEFAULT_OPTION);
 			reset(input);
 		}
+		if (countX== 5|| countO==5)
+		{
+			message = "Tie" ;
+			input = JOptionPane.showConfirmDialog(null, message, "Message", JOptionPane.DEFAULT_OPTION);
+			reset(input);
+		}
 
 	}
 	void reset(int d) {
@@ -118,6 +126,8 @@ public class Myframe extends JFrame{
 			pa.validate();
 			arrO.removeAll(arrO);
 			arrX.removeAll(arrX);
+			countX=0;
+			countO=0;
 		}
 	}
 }
