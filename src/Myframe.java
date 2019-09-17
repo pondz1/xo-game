@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -14,8 +15,9 @@ public class Myframe extends JFrame{
 	
 	JPanel pa = new JPanel();
 	Button bt[] = new Button[9];
-	JPanel returnPanel = new JPanel();
+	JPanel botPanel = new JPanel();
 	Button returnButton = new Button("return");
+	JLabel msg = new JLabel();
 	int count = 0;
 	ArrayList<Integer> arrX = new ArrayList<Integer>();
 	ArrayList<Integer> arrO = new ArrayList<Integer>();
@@ -36,18 +38,24 @@ public class Myframe extends JFrame{
 	int countO=0;
 	public Myframe(String str) {
 		setTitle(str);
-		setLayout(new GridLayout(0, 1));
-		setBounds(300, 200, 400, 400);
+		//setLayout(new GridLayout(0, 1));
+		setLayout(null);
+		setBounds(300, 200, 400, 500);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		pa.setLayout(new GridLayout(3, 3));
-		returnButton.setLocation(0, 0);
-		returnButton.setSize(400, 100);
-		returnPanel.setLayout(null);
-		returnPanel.add(returnButton);
+		pa.setBounds(3, 0, 380, 360);
+		
+		botPanel.setLayout(new GridLayout(0, 1));
+		botPanel.setBounds(3, 360, 380, 100);
+		
+		botPanel.add(msg);
+		botPanel.add(returnButton);
+		
 		add(pa);
-		add(returnPanel);
+		add(botPanel);
 		theCondition();
 		createButton();
+		returnBT();
 		
 	}
 	void createButton() {
@@ -79,10 +87,12 @@ public class Myframe extends JFrame{
 			public void actionPerformed(ActionEvent arg0) {
 				if (count%2 == 0) {
 					setTitle("Next Player O");
+					msg.setText("Next Player O");
 					setX(i);
 					countX++;
 				}else {
 					setTitle("Next Player X");
+					msg.setText("Next Player X");
 					setO(i);
 					countO++;
 				}
@@ -111,22 +121,22 @@ public class Myframe extends JFrame{
 		if (xWin) {
 			message = "X win" ;
 		    input = JOptionPane.showConfirmDialog(null, message, "Message", JOptionPane.DEFAULT_OPTION);
-		    reset(input);
+		    reset();
 		}else if (oWin) {
 			message = "O win" ;
 			input = JOptionPane.showConfirmDialog(null, message, "Message", JOptionPane.DEFAULT_OPTION);
-			reset(input);
+			reset();
 		}
 		if (countX== 5|| countO==5)
 		{
 			message = "Tie" ;
 			input = JOptionPane.showConfirmDialog(null, message, "Message", JOptionPane.DEFAULT_OPTION);
-			reset(input);
+			reset();
 		}
 
 	}
-	void reset(int d) {
-		if (JOptionPane.OK_OPTION == d) {
+	void reset() {
+		if (JOptionPane.OK_OPTION == input) {
 			pa.removeAll();
 			createButton();
 			pa.validate();
@@ -135,5 +145,15 @@ public class Myframe extends JFrame{
 			countX=0;
 			countO=0;
 		}
+	}
+	void returnBT() {
+		returnButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+				reset();
+			}
+		});
 	}
 }
