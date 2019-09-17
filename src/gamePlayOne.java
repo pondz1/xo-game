@@ -7,6 +7,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Random;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -38,7 +40,9 @@ public class gamePlayOne extends JFrame{
 	int input = 100;
 	int countX=0;
 	int countO=0;
-	Main m = new Main();
+    Main m = new Main();
+    
+    static int indexData[] = {0,1,2,3,4,5,6,7,8};
 
 	public gamePlayOne(String str) {
 		setTitle(str);
@@ -72,14 +76,16 @@ public class gamePlayOne extends JFrame{
 		bt[i].setBackground(Color.BLUE);
 		bt[i].setFont(new Font("Tahoma", Font.BOLD, 100));
 		bt[i].setForeground(Color.BLACK);
-		bt[i].setEnabled(false);
+        bt[i].setEnabled(false);
+        indexData = removeTheElement(indexData,i);
 		arrX.add(i);
 	}
 	void setO(int i) {
 		bt[i].setLabel("O");
 		bt[i].setBackground(Color.RED);
 		bt[i].setFont(new Font("Tahoma", Font.BOLD, 100));
-		bt[i].setEnabled(false);
+        bt[i].setEnabled(false);
+        indexData = removeTheElement(indexData,i);
 		arrO.add(i);
 	}
 	void onClick(int i) {
@@ -87,18 +93,19 @@ public class gamePlayOne extends JFrame{
 				
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				if (count%2 == 0) {
-					setTitle("Next Player O");
-					msg.setText("Next Player O");
-					setX(i);
-					countX++;
-				}else {
-					setTitle("Next Player X");
-					msg.setText("Next Player X");
-					setO(i);
-					countO++;
-				}
-				count++;
+                setTitle("Next Player X");
+                msg.setText("Next Player X");
+                setX(i);
+                int ran = getRandom(indexData);
+                setO(ran);
+                countO++;
+                countX++;
+                count++;
+                System.out.println("ran = "+ran);
+                for (int i = 0; i < indexData.length; i++) {
+                    System.out.print(indexData[i]+ " ");
+                }
+                System.out.println();
 				checkWin();
 			}
 		});
@@ -149,7 +156,12 @@ public class gamePlayOne extends JFrame{
 		arrO.removeAll(arrO);
 		arrX.removeAll(arrX);
 		countX=0;
-		countO=0;
+        countO=0;
+        indexData = new int[9];
+        for (int i = 0; i < 9; i++) {
+            indexData[i] = i;
+        }
+        
 	}
 	void returnBT() {
 		returnButton.addActionListener(new ActionListener() {
@@ -195,5 +207,23 @@ public class gamePlayOne extends JFrame{
 								
 			}
 		});
-	}
+    }
+    int getRandom(int[] array) {
+        int rnd = new Random().nextInt(array.length);
+        return array[rnd];
+    }
+    int[] removeTheElement(int[] arr, int index) 
+    { 
+        if (arr == null || index < 0 || index >= arr.length) { 
+            return arr; 
+        }  
+        int[] anotherArray = new int[arr.length - 1]; 
+        for (int i = 0, k = 0; i < arr.length; i++) { 
+            if (i == index) { 
+                continue; 
+            } 
+            anotherArray[k++] = arr[i]; 
+        } 
+        return anotherArray; 
+    }      
 }
