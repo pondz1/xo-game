@@ -14,6 +14,8 @@ public class Myframe extends JFrame{
 	
 	JPanel pa = new JPanel();
 	Button bt[] = new Button[9];
+	JPanel returnPanel = new JPanel();
+	Button returnButton = new Button("return");
 	int count = 0;
 	ArrayList<Integer> arrX = new ArrayList<Integer>();
 	ArrayList<Integer> arrO = new ArrayList<Integer>();
@@ -38,8 +40,12 @@ public class Myframe extends JFrame{
 		setBounds(300, 200, 400, 400);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		pa.setLayout(new GridLayout(3, 3));
-		//pa.setBounds(0, 0, 400, 400);
+		returnButton.setLocation(0, 0);
+		returnButton.setSize(400, 100);
+		returnPanel.setLayout(null);
+		returnPanel.add(returnButton);
 		add(pa);
+		add(returnPanel);
 		theCondition();
 		createButton();
 		

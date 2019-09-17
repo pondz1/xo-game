@@ -34,6 +34,7 @@ public class Main {
 		pan.setSize(400, 200);
 		pan.setLayout(null);
 		pan.add(playTwo);
+		
 		menu.add(pan);
 		//menu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		menu.setVisible(true);
