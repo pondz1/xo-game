@@ -37,6 +37,8 @@ public class gamePlayOne extends JFrame{
 	ArrayList<Integer> left = new ArrayList<Integer>();
 	ArrayList<Integer> right = new ArrayList<Integer>();
 	
+	ArrayList<Integer> botWin = new ArrayList<Integer>();
+	
 	int input = 100;
 	int countX=0;
 	int countO=0;
@@ -98,24 +100,84 @@ public class gamePlayOne extends JFrame{
                 setTitle("Next Player X");
                 msg.setText("Next Player X");
                 setX(i);
-                try {
-					int ran = getRandom(indexData);
-					setO(ran);
-					System.out.println("ran = "+ran);
-				} catch (IllegalArgumentException e) {
-					
-				}
+                if (countX != 5) {
+					Bot();
+				}                
                 countO++;
                 countX++;
                 count++;
-                
-                for (int i = 0; i < indexData.length; i++) {
-                    System.out.print(indexData[i]+ " ");
-                }
-                System.out.println();
 				checkWin();
 			}
 		});
+	}
+	void Bot() {
+		try {
+			/*************************Bot***************************/
+			if (arrO.contains(0) && arrO.contains(1)) {
+				set(2);			
+			} else if (arrO.contains(3) && arrO.contains(4)) {
+				set(5);
+			} else if (arrO.contains(6) && arrO.contains(7)) {
+				set(8);
+			} else if (arrO.contains(0) && arrO.contains(3)) {
+				set(6);
+			} else if (arrO.contains(1) && arrO.contains(4)) {
+				set(7);
+			} else if (arrO.contains(2) && arrO.contains(5)) {
+				set(8);
+			} else if (arrO.contains(0) && arrO.contains(4)) {
+				set(8);
+			} else if (arrO.contains(2) && arrO.contains(4)) {
+				set(6);										
+			} /*************************Mid***************************/
+			else if (arrO.contains(0) && arrO.contains(2)) {
+				set(1);
+			} else if (arrO.contains(3) && arrO.contains(5)) {
+				set(4);
+			} else if (arrO.contains(6) && arrO.contains(8)) {
+				set(7);
+			} else if (arrO.contains(0) && arrO.contains(6)) {
+				set(3);
+			} else if (arrO.contains(1) && arrO.contains(7)) {
+				set(4);
+			} else if (arrO.contains(2) && arrO.contains(8)) {
+				set(5);
+			} else if (arrO.contains(0) && arrO.contains(8)) {
+				set(4);
+			} else if (arrO.contains(2) && arrO.contains(6)) {
+				set(4);
+			} /***************************Top*************************/
+			else if (arrO.contains(1) && arrO.contains(2)) {
+				set(0);
+			} else if (arrO.contains(4) && arrO.contains(5)) {
+				set(7);
+			} else if (arrO.contains(7) && arrO.contains(8)) {
+				set(6);
+			} else if (arrO.contains(3) && arrO.contains(6)) {
+				set(0);
+			} else if (arrO.contains(4) && arrO.contains(7)) {
+				set(1);
+			} else if (arrO.contains(5) && arrO.contains(8)) {
+				set(2);
+			} else if (arrO.contains(4) && arrO.contains(8)) {
+				set(0);
+			} else if (arrO.contains(4) && arrO.contains(6)) {
+				set(2);
+			} else {
+				int ran = getRandom(indexData);
+				set(ran);
+			}	
+			
+		} catch (IllegalArgumentException e) {}
+	}
+	void set(int a){
+		if (arrX.contains(a)) {
+			int ran = getRandom(indexData);
+			setO(ran);	
+		}else {
+			setO(a);
+		}
+			
 	}
 	void theCondition() {
 		lineTop.add(0);lineTop.add(1);lineTop.add(2);
@@ -145,7 +207,7 @@ public class gamePlayOne extends JFrame{
 		}
 		if (countX== 5|| countO==5)
 		{
-			message = "Tie" ;
+			message = "Draw" ;
 			input = JOptionPane.showConfirmDialog(null, message, "Message", JOptionPane.DEFAULT_OPTION);
 			resetWin();
 		}

@@ -131,7 +131,7 @@ public class gamePlayTwo extends JFrame{
 		}
 		if (countX== 5|| countO==5)
 		{
-			message = "Tie" ;
+			message = "Draw" ;
 			input = JOptionPane.showConfirmDialog(null, message, "Message", JOptionPane.DEFAULT_OPTION);
 			resetWin();
 		}
