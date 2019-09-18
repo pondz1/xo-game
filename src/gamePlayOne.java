@@ -77,7 +77,8 @@ public class gamePlayOne extends JFrame{
 		bt[i].setFont(new Font("Tahoma", Font.BOLD, 100));
 		bt[i].setForeground(Color.BLACK);
         bt[i].setEnabled(false);
-        indexData = removeTheElement(indexData,i);
+        int ind = findIndex(indexData, i);
+        indexData = removeTheElement(indexData,ind);
 		arrX.add(i);
 	}
 	void setO(int i) {
@@ -85,7 +86,8 @@ public class gamePlayOne extends JFrame{
 		bt[i].setBackground(Color.RED);
 		bt[i].setFont(new Font("Tahoma", Font.BOLD, 100));
         bt[i].setEnabled(false);
-        indexData = removeTheElement(indexData,i);
+        int ind = findIndex(indexData, i);
+        indexData = removeTheElement(indexData,ind);
 		arrO.add(i);
 	}
 	void onClick(int i) {
@@ -96,12 +98,17 @@ public class gamePlayOne extends JFrame{
                 setTitle("Next Player X");
                 msg.setText("Next Player X");
                 setX(i);
-                int ran = getRandom(indexData);
-                setO(ran);
+                try {
+					int ran = getRandom(indexData);
+					setO(ran);
+					System.out.println("ran = "+ran);
+				} catch (IllegalArgumentException e) {
+					
+				}
                 countO++;
                 countX++;
                 count++;
-                System.out.println("ran = "+ran);
+                
                 for (int i = 0; i < indexData.length; i++) {
                     System.out.print(indexData[i]+ " ");
                 }
@@ -225,5 +232,9 @@ public class gamePlayOne extends JFrame{
             anotherArray[k++] = arr[i]; 
         } 
         return anotherArray; 
-    }      
+    }    
+    int findIndex(int arr[], int t){ 
+        int index = Arrays.binarySearch(arr, t); 
+        return (index < 0) ? -1 : index; 
+    }
 }
